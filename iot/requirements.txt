@@ -1,0 +1,7 @@
+RPi.GPIO==0.7.0
+opencv-python==4.5.3.56
+numpy==1.21.2
+picamera==1.13
+pyzbar==0.1.8
+requests==2.26.0
+mfrc522==0.0.7 

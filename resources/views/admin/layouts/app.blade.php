@@ -58,7 +58,7 @@
             <!-- Sidebar -->
             <div class="col-md-3 col-lg-2 px-0 sidebar">
                 <div class="p-3">
-                    <h4 class="text-center mb-4">Event Ticketing</h4>
+                    <h4 class="text-center mb-4">STARTIX</h4>
                     <hr>
                     <ul class="nav flex-column">
                         <li class="nav-item">
@@ -75,7 +75,8 @@
                             @endauth
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('events.index') }}">
+                            <a class="nav-link {{ request()->routeIs('admin.acara') ? 'active' : '' }}"
+                                 href="{{ route('admin.acara') }}">
                                 <i class="fas fa-calendar-alt"></i>
                                 <span>Event</span>
                             </a>

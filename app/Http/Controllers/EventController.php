@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\DB;
 class EventController extends Controller
 {
     // Dashboard untuk user (tidak login)
+
+       public function userHome()
+{
+        $events = Event::latest()->take(3)->get();
+
+    return view('user.layouts.home', compact('events'));
+}
+
     public function userDashboard(Request $request)
     {
         $query = Event::query();
@@ -35,7 +43,7 @@ class EventController extends Controller
         $query->orderBy('event_date', 'asc');
         $events = $query->paginate(9);
         $venues = Event::select('venue')->distinct()->orderBy('venue')->pluck('venue');
-        return view('user.dashboard', compact('events', 'venues'));
+        return view('user.layouts.dashboard', compact('events', 'venues'));
     }
 
     // Dashboard untuk admin (login & role admin)
@@ -72,6 +80,32 @@ class EventController extends Controller
         $chartData = $this->getChartData($request);
         return view('admin.pages.dashboard.index', compact('events', 'stats', 'venues', 'chartData'));
     }
+     public function adminEvents(Request $request)
+    {
+        $query = Event::query();
+
+        // Filter
+        if ($request->has('search')) {
+            $query->where('title', 'like', '%' . $request->search . '%');
+        }
+        if ($request->has('type') && $request->type != '') {
+            $query->where('type', $request->type);
+        }
+        if ($request->has('month') && $request->month != '') {
+            $query->whereMonth('event_date', $request->month);
+        }
+        if ($request->has('year') && $request->year != '') {
+            $query->whereYear('event_date', $request->year);
+        }
+        if ($request->has('venue') && $request->venue != '') {
+            $query->where('venue', $request->venue);
+        }
+        $query->where('status', 'upcoming');
+        $query->orderBy('event_date', 'asc');
+        $events = $query->paginate(9);
+        $venues = Event::select('venue')->distinct()->orderBy('venue')->pluck('venue');
+        return view('admin.layouts.dashboard', compact('events', 'venues'));
+    }
 
     public function show(Event $event)
     {
@@ -82,7 +116,7 @@ class EventController extends Controller
         } elseif (auth()->check() && auth()->user()->role === 'admin') {
             return view('admin.events.show', compact('event', 'sold', 'revenue'));
         } else {
-            return view('user.events.show', compact('event', 'sold'));
+            return view('user.layouts.show', compact('event', 'sold'));
         }
     }
 
@@ -169,7 +203,7 @@ class EventController extends Controller
         $cities = [
             'Jakarta', 'Bandung', 'Semarang', 'Surabaya', 'Denpasar', 'Medan', 'Palembang', 'Balikpapan', 'Makassar'
         ];
-        return view('user.order', compact('event', 'provinces', 'cities'));
+        return view('user.layouts.order', compact('event', 'provinces', 'cities'));
     }
 
     public function processOrder(Request $request, Event $event)
@@ -189,7 +223,7 @@ class EventController extends Controller
             'no' => '123456712345',
             'an' => 'Hafiz'
         ];
-        return view('user.payment', compact('event', 'orderData', 'rekening'));
+        return view('user.layouts.payment', compact('event', 'orderData', 'rekening'));
     }
 
     public function processPayment(Request $request, Event $event)

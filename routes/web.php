@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\AdminController;
 */
 
 // User Dashboard (tidak login)
-Route::get('/', [EventController::class, 'userDashboard'])->name('user.dashboard');
+Route::get('/', [EventController::class, 'userHome'])->name('user.dashboard');
 
 // Events List (untuk user/guest, tanpa login)
 Route::get('/events', [EventController::class, 'userDashboard'])->name('events.index');
@@ -33,10 +33,14 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Route agar user/guest bisa melihat daftar event admin tanpa login
 Route::get('/admin/events', [EventController::class, 'index'])->name('admin.events.index');
+Route::get('/admin/acara', [EventController::class, 'adminEvents'])->name('admin.acara');
+
+
 
 // Admin area (hanya untuk admin/superadmin)
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard', [EventController::class, 'adminDashboard'])->name('dashboard');
+
     Route::resource('tickets', TicketOrderController::class)->only(['index', 'show', 'update']);
     Route::get('tickets/export-excel', [TicketOrderController::class, 'exportConfirmedExcel'])->name('tickets.export-excel');
     Route::resource('admins', AdminController::class);

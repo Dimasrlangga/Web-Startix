@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('title', 'Detail Event (Admin)')
 
@@ -31,7 +31,7 @@
                         <dt class="col-sm-4">Pendapatan</dt>
                         <dd class="col-sm-8">Rp {{ number_format($revenue, 0, ',', '.') }}</dd>
                     </dl>
-                    <a href="{{ route('admin.events.index') }}" class="btn btn-secondary w-100 mt-2">Kembali ke Daftar Event</a>
+                    <a href="{{ route('admin.acara') }}" class="btn btn-secondary w-100 mt-2">Kembali ke Daftar Event</a>
                 </div>
             </div>
         </div>

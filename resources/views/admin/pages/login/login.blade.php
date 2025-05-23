@@ -9,7 +9,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f8f9fa;
+        background: linear-gradient(to top, #0d6efd, #ffffff);
         }
         .login-card {
             border: none;
@@ -17,7 +17,7 @@
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
         }
         .login-header {
-            background: #343a40;
+            background: #0d6efd;
             color: white;
             padding: 20px;
             border-radius: 10px 10px 0 0;
@@ -43,7 +43,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="card login-card">
                     <div class="login-header text-center">
-                        <h4 class="mb-0">Event Ticketing</h4>
+                        <h3 class="mb-0">Hi Admin</h3>
                         <p class="mb-0">Login ke Akun Anda</p>
                     </div>
                     <div class="login-body">

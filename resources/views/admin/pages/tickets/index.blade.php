@@ -17,7 +17,7 @@
                 <table class="table table-hover align-middle">
                     <thead class="table-light">
                         <tr>
-                            <th>#</th>
+                            <th>No</th>
                             <th>Event</th>
                             <th>Nama</th>
                             <th>Email</th>

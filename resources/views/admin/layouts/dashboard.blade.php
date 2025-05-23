@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-<div class="container-fluid">
+<div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h3 mb-0 text-gray-800">Event Terbaru</h1>
     </div>
@@ -12,7 +12,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Filter Events</h6>
         </div>
         <div class="card-body">
-            <form action="{{ route('user.dashboard') }}" method="GET" class="row g-3">
+            <form action="{{ route('admin.acara') }}" method="GET" class="row g-3">
                 <div class="col-md-3">
                     <input type="text" class="form-control" name="search" placeholder="Search events..." value="{{ request('search') }}">
                 </div>
@@ -64,10 +64,11 @@
         </div>
         <div class="card-body">
             <div class="row">
-                @forelse($events as $event)
+            
+                @forelse($events as $event) 
                     <div class="col-md-4 mb-4">
                         <div class="card h-100">
-                            <img src="{{ $event->image_url }}" class="card-img-top" alt="{{ $event->title }}" style="height: 200px; object-fit: cover;">
+                            <img src="{{ asset('images/' . $event->image) }}" class="card-img-top" alt="{{ $event->title }}" style="height: 200px; object-fit: cover;">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $event->title }}</h5>
                                 <p class="card-text">
